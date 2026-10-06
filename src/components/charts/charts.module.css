@@ -1,0 +1,27 @@
+/* Colours come from tokens (--series-1, --status-*), so light and dark mode each use their own steps. */
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.tile { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; }
+.tileLabel { color: var(--ink-2); font-size: 0.875rem; }
+.tileValue { font-size: 1.6rem; font-weight: 600; }
+
+.bars { display: grid; gap: 6px; }
+.barRow { display: grid; grid-template-columns: minmax(90px, 38%) 1fr; align-items: center; gap: 10px; font-size: 0.875rem; }
+.barLabel { color: var(--ink-2); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.barIcon { display: inline-block; width: 1.2em; color: var(--ink); font-weight: 700; }
+.barTrack { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.bar { height: 18px; border-radius: 0 4px 4px 0; flex: none; }
+.barValue { color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.line { width: 100%; height: auto; display: block; touch-action: pan-y; }
+.line .grid { stroke: var(--hairline); stroke-width: 1; }
+.line .axis { stroke: var(--baseline); stroke-width: 1; }
+.line .tick { fill: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; }
+.line .path { fill: none; stroke: var(--series-1); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.line .area { fill: var(--series-1); opacity: 0.1; }
+.line .dot { fill: var(--series-1); stroke: var(--surface); stroke-width: 2; }
+.line .crosshair { stroke: var(--baseline); stroke-width: 1; }
+
+.tooltip {
+  position: fixed; z-index: 10; pointer-events: none; max-width: 240px;
+  background: var(--ink); color: var(--page); font-size: 0.8rem; padding: 6px 10px; border-radius: 6px;
+}

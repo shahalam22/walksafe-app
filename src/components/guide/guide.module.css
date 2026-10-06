@@ -1,0 +1,48 @@
+/* Always black: nothing to read for the user, little power on OLED screens. */
+.guide { position: relative; background: #000; color: #fff; overflow: hidden; height: 100dvh; }
+
+.toggle {
+  position: absolute; inset: 0; z-index: 1; width: 100%; border: 0; margin: 0;
+  background: transparent; color: #fff; font: inherit; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 16px; padding: 72px 24px 32px; text-align: center;
+}
+.toggle:focus-visible { outline: 4px solid #ffd400; outline-offset: -8px; }
+.title { font-size: clamp(2rem, 9vw, 3.2rem); font-weight: 700; line-height: 1.15; }
+.command { font-size: clamp(1.6rem, 7vw, 2.4rem); font-weight: 600; color: #ffd400; min-height: 1.2em; }
+.status { font-size: 1rem; color: #b5b5b5; max-width: 32ch; }
+.menuBtn {
+  position: absolute; top: max(12px, env(safe-area-inset-top)); right: 12px; z-index: 2;
+  font: inherit; font-size: 0.95rem; color: #d0d0d0; background: #111;
+  border: 1px solid #444; border-radius: 8px; min-height: 44px; padding: 8px 14px;
+}
+
+/* While guiding, everything goes very dim unless demo view is on. */
+.guide[data-on="true"]:not([data-view="true"]) .title { color: #2a2a2a; font-size: 1.4rem; }
+.guide[data-on="true"]:not([data-view="true"]) .command,
+.guide[data-on="true"]:not([data-view="true"]) .status { color: #2a2a2a; }
+.guide[data-on="true"]:not([data-view="true"]) .menuBtn { color: #333; border-color: #1a1a1a; background: #000; }
+
+/* The camera <video> must stay rendered for frames to be captured. */
+.view {
+  position: absolute; left: 0; top: 0; width: 1px; height: 1px; opacity: 0; overflow: hidden; pointer-events: none;
+}
+.guide[data-on="true"][data-view="true"] .view {
+  width: 100%; height: auto; opacity: 1; top: 68px; bottom: 170px; padding: 0 8px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: start;
+}
+.guide[data-on="true"][data-view="true"] .toggle { justify-content: flex-end; }
+.guide[data-on="true"][data-view="true"] .title { font-size: 1.1rem; color: #9a9a9a; }
+.view video, .view img { width: 100%; max-height: 100%; object-fit: contain; border-radius: 8px; background: #111; }
+
+/* Helper menu */
+.sheet {
+  width: min(560px, calc(100vw - 24px)); max-height: calc(100dvh - 24px);
+  border: 1px solid var(--border); border-radius: 14px; padding: 0;
+  background: var(--surface); color: var(--ink);
+}
+.sheet::backdrop { background: rgba(0, 0, 0, 0.7); }
+.sheetBody { padding: 20px; display: grid; gap: 10px; }
+.sheetBody h3 { margin: 10px 0 0; }
+.sheetBody p { margin: 0; }
+.sheetActions { margin-top: 12px; justify-content: flex-end; }
